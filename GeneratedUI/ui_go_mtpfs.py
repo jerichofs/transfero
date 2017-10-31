@@ -1,0 +1,75 @@
+# -*- coding: utf-8 -*-
+
+# Created by: PyQt5 UI code generator 5.9
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class Ui_go_mptfs(object):
+    def setupUi(self, go_mptfs):
+        go_mptfs.setObjectName("go_mptfs")
+        go_mptfs.resize(577, 463)
+        self.gridLayout_2 = QtWidgets.QGridLayout(go_mptfs)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.Mount = QtWidgets.QPushButton(go_mptfs)
+        self.Mount.setObjectName("Mount")
+        self.gridLayout_2.addWidget(self.Mount, 0, 0, 1, 1)
+        self.Output = QtWidgets.QTextBrowser(go_mptfs)
+        self.Output.setObjectName("Output")
+        self.gridLayout_2.addWidget(self.Output, 0, 1, 2, 1)
+        self.Unmount = QtWidgets.QPushButton(go_mptfs)
+        self.Unmount.setEnabled(True)
+        self.Unmount.setObjectName("Unmount")
+        self.gridLayout_2.addWidget(self.Unmount, 1, 0, 1, 1)
+        self.gridLayout = QtWidgets.QGridLayout()
+        self.gridLayout.setObjectName("gridLayout")
+        self.DevicePath = QtWidgets.QLabel(go_mptfs)
+        self.DevicePath.setObjectName("DevicePath")
+        self.gridLayout.addWidget(self.DevicePath, 0, 0, 1, 1)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.AndroidPath = QtWidgets.QLineEdit(go_mptfs)
+        self.AndroidPath.setObjectName("AndroidPath")
+        self.horizontalLayout.addWidget(self.AndroidPath)
+        self.ChoosePathAndroid = QtWidgets.QToolButton(go_mptfs)
+        self.ChoosePathAndroid.setObjectName("ChoosePathAndroid")
+        self.horizontalLayout.addWidget(self.ChoosePathAndroid)
+        self.gridLayout.addLayout(self.horizontalLayout, 1, 0, 1, 1)
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.MoveFileForward = QtWidgets.QPushButton(go_mptfs)
+        self.MoveFileForward.setObjectName("MoveFileForward")
+        self.verticalLayout.addWidget(self.MoveFileForward)
+        self.MoveFileBackward = QtWidgets.QPushButton(go_mptfs)
+        self.MoveFileBackward.setObjectName("MoveFileBackward")
+        self.verticalLayout.addWidget(self.MoveFileBackward)
+        self.gridLayout.addLayout(self.verticalLayout, 3, 1, 1, 1)
+        self.ComputerTree = QtWidgets.QTreeView(go_mptfs)
+        self.ComputerTree.setObjectName("ComputerTree")
+        self.gridLayout.addWidget(self.ComputerTree, 3, 2, 1, 1)
+        self.AndroidLabel = QtWidgets.QLabel(go_mptfs)
+        self.AndroidLabel.setObjectName("AndroidLabel")
+        self.gridLayout.addWidget(self.AndroidLabel, 2, 0, 1, 1)
+        self.ComputerLabel = QtWidgets.QLabel(go_mptfs)
+        self.ComputerLabel.setObjectName("ComputerLabel")
+        self.gridLayout.addWidget(self.ComputerLabel, 2, 2, 1, 1)
+        self.AndroidTree = QtWidgets.QTreeView(go_mptfs)
+        self.AndroidTree.setObjectName("AndroidTree")
+        self.gridLayout.addWidget(self.AndroidTree, 3, 0, 1, 1)
+        self.gridLayout_2.addLayout(self.gridLayout, 2, 0, 1, 2)
+
+        self.retranslateUi(go_mptfs)
+        QtCore.QMetaObject.connectSlotsByName(go_mptfs)
+
+    def retranslateUi(self, go_mptfs):
+        _translate = QtCore.QCoreApplication.translate
+        go_mptfs.setWindowTitle(_translate("go_mptfs", "GoMtpfs"))
+        self.Mount.setText(_translate("go_mptfs", "Mount"))
+        self.Unmount.setText(_translate("go_mptfs", "Unmount"))
+        self.DevicePath.setText(_translate("go_mptfs", "Mount folder for Android"))
+        self.ChoosePathAndroid.setText(_translate("go_mptfs", "..."))
+        self.MoveFileForward.setText(_translate("go_mptfs", ""))
+        self.MoveFileBackward.setText(_translate("go_mptfs", ""))
+        self.AndroidLabel.setText(_translate("go_mptfs", "Android device"))
+        self.ComputerLabel.setText(_translate("go_mptfs", "Computer"))

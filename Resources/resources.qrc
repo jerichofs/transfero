@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="button_arrows">
+    <file>ButtonIcons/left-arrow.png</file>
+    <file>ButtonIcons/right-arrow.png</file>
+  </qresource>
+  <qresource prefix="window_icon">
+    <file>WindowIcon/transfero.png</file>
+  </qresource>
+</RCC>
