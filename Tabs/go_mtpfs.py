@@ -4,8 +4,8 @@ import re
 import subprocess
 import pkg_resources
 from Resources import resources
-from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QMessageBox, QLineEdit, QLabel, QVBoxLayout, QHBoxLayout, QCheckBox, QFileDialog, QTreeView, QFileSystemModel, QMessageBox
-from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QMessageBox, QLineEdit, QLabel, QVBoxLayout, QHBoxLayout, QCheckBox, QFileDialog, QTreeView, QFileSystemModel, QMessageBox, QShortcut
+from PyQt5.QtGui import QIcon, QKeySequence
 from GeneratedUI.ui_go_mtpfs import Ui_go_mptfs
 
 class Go_mtpfs(QWidget, Ui_go_mptfs):
@@ -42,6 +42,11 @@ class Go_mtpfs(QWidget, Ui_go_mptfs):
 
         self.AndroidPath.setText(os.path.expanduser('~'))
 
+        # setting up shortcuts for copying files
+        self.copy_android_computer = QShortcut(QKeySequence('Right'), self, self.CopyShortcutAndroidComputer)
+        self.copy_computer_android = QShortcut(QKeySequence('Left'), self, self.CopyShortcutComputerAndroid)
+
+
         self.ComputerTree.clicked.connect(self.GetComputerFilePath)
         self.Mount.clicked.connect(self.MountFileSystem)
         self.Unmount.clicked.connect(self.UnmountFileSystem)
@@ -53,8 +58,9 @@ class Go_mtpfs(QWidget, Ui_go_mptfs):
         index = self.ComputerTree.currentIndex()
         path = self.ComputerTreeModel.rootPath()
 
+
     def CopyFileFromAndroidToComputer(self):
-        
+
         index_android = self.AndroidTree.currentIndex()
         file_path_android = self.AndroidTreeModel.filePath(index_android)
         file_name_android = self.AndroidTreeModel.fileName(index_android)
@@ -237,3 +243,66 @@ class Go_mtpfs(QWidget, Ui_go_mptfs):
             msg.setStandardButtons(QMessageBox.Ok)
             msg.exec_()
 
+    def CopyShortcutAndroidComputer(self):
+        # if system is mounted we can use shortcuts
+        if self.Unmount.isEnabled():
+            index_android = self.AndroidTree.currentIndex()
+            file_path_android = self.AndroidTreeModel.filePath(index_android)
+            file_name_android = self.AndroidTreeModel.fileName(index_android)
+
+            index_computer = self.ComputerTree.currentIndex()
+            file_path_computer = self.ComputerTreeModel.filePath(index_computer)
+            file_name_computer = self.ComputerTreeModel.fileName(index_computer)
+            file_type_computer = self.ComputerTreeModel.type(index_computer)
+            file_name_computer_length = len(file_name_computer)
+
+            if file_type_computer == 'Folder':
+                self.Output.append('Please wait while copying...')
+                # the next command allows to show Output while a file is copying, it's useful when files are large and thus we notify a user to wait
+                QApplication.processEvents()
+                command_copy = ['cp', '-R', file_path_android, file_path_computer]
+                cp = subprocess.Popen(command_copy, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                output_cp = cp.communicate()
+
+                self.Output.append(file_name_android + ' has been successfully copied to ' + file_path_computer)
+            else:
+
+                self.Output.append('Please wait while copying...')
+                QApplication.processEvents()
+                # "in file_path_computer" we delete the name of the file at the end of the path
+                command_copy = ['cp', '-R', file_path_android, file_path_computer[:-file_name_computer_length]]
+                cp = subprocess.Popen(command_copy, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                output_cp = cp.communicate()
+
+                self.Output.append(file_name_android + ' has been successfully copied to ' + file_path_computer[:-file_name_computer_length])
+
+    def CopyShortcutComputerAndroid(self):
+        if self.Unmount.isEnabled():
+            # if system is mounted we can use shortcuts
+            index_computer = self.ComputerTree.currentIndex()
+            file_path_computer = self.ComputerTreeModel.filePath(index_computer)
+            file_name_computer = self.ComputerTreeModel.fileName(index_computer)
+
+            index_android = self.AndroidTree.currentIndex()
+            file_path_android = self.AndroidTreeModel.filePath(index_android)
+            file_name_android = self.AndroidTreeModel.fileName(index_android)
+            file_type_android = self.AndroidTreeModel.type(index_android)
+            file_name_android_length = len(file_name_android)
+
+            if file_type_android == 'Folder':
+                self.Output.append('Please wait while copying...')
+
+                QApplication.processEvents()
+                command_copy = ['cp', '-R', file_path_computer, file_path_android]
+                cp = subprocess.Popen(command_copy, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                output_cp = cp.communicate()
+
+                self.Output.append(file_name_computer + ' has been successfully copied to ' + file_path_android)
+            else:
+                self.Output.append('Please wait while copying...')
+                QApplication.processEvents()
+                command_copy = ['cp', '-R', file_path_computer, file_path_android[:-file_name_android_length]]
+                cp = subprocess.Popen(command_copy, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                output_cp = cp.communicate()
+
+                self.Output.append(file_name_computer + ' has been successfully copied to ' + file_path_android[:-file_name_android_length])
