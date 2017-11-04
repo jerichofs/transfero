@@ -46,16 +46,12 @@ class Go_mtpfs(QWidget, Ui_go_mptfs):
         self.copy_android_computer = QShortcut(QKeySequence('Right'), self, self.CopyShortcutAndroidComputer)
         self.copy_computer_android = QShortcut(QKeySequence('Left'), self, self.CopyShortcutComputerAndroid)
 
-        self.ComputerTree.clicked.connect(self.GetComputerFilePath)
         self.Mount.clicked.connect(self.MountFileSystem)
         self.Unmount.clicked.connect(self.UnmountFileSystem)
         self.ChoosePathAndroid.clicked.connect(self.GetDeviceDirectory)
         self.MoveFileForward.clicked.connect(self.CopyFileFromAndroidToComputer)
         self.MoveFileBackward.clicked.connect(self.CopyFileFromComputerToAndroid)
 
-    def GetComputerFilePath(self):
-        index = self.ComputerTree.currentIndex()
-        path = self.ComputerTreeModel.rootPath()
 
     def CopyFileFromAndroidToComputer(self):
 
@@ -70,24 +66,25 @@ class Go_mtpfs(QWidget, Ui_go_mptfs):
         file_name_computer_length = len(file_name_computer)
 
         if file_type_computer == 'Folder':
-            self.Output.append('Please wait while copying...')
+            self.Output.append('<html><b>Please wait while copying...</b</html>')
             # the next command allows to show Output while a file is copying, it's useful when files are large and thus we notify a user to wait
             QApplication.processEvents()
             command_copy = ['cp', '-R', file_path_android, file_path_computer]
             cp = subprocess.Popen(command_copy, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             output_cp = cp.communicate()
 
-            self.Output.append(file_name_android + ' has been successfully copied to ' + file_path_computer)
+            self.Output.append('<html><b>' + file_name_android + '</b</html>' + ' has been successfully copied to ' + '<html><b>' + file_path_computer + '</b</html>')
         else:
 
-            self.Output.append('Please wait while copying...')
+            self.Output.append('<html><b>Please wait while copying...</b</html>')
             QApplication.processEvents()
             # "in file_path_computer" we delete the name of the file at the end of the path
             command_copy = ['cp', '-R', file_path_android, file_path_computer[:-file_name_computer_length]]
             cp = subprocess.Popen(command_copy, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             output_cp = cp.communicate()
 
-            self.Output.append(file_name_android + ' has been successfully copied to ' + file_path_computer[:-file_name_computer_length])
+            self.Output.append('<html><b>' + file_name_android + '</b</html>' + ' has been successfully copied to ' + '<html><b>' + file_path_computer[:-file_name_computer_length] + '</b</html>')
+
 
     def CopyFileFromComputerToAndroid(self):
 
@@ -102,22 +99,23 @@ class Go_mtpfs(QWidget, Ui_go_mptfs):
         file_name_android_length = len(file_name_android)
 
         if file_type_android == 'Folder':
-            self.Output.append('Please wait while copying...')
+            self.Output.append('<html><b>Please wait while copying...</b</html>')
 
             QApplication.processEvents()
             command_copy = ['cp', '-R', file_path_computer, file_path_android]
             cp = subprocess.Popen(command_copy, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             output_cp = cp.communicate()
 
-            self.Output.append(file_name_computer + ' has been successfully copied to ' + file_path_android)
+            self.Output.append('<html><b>' + file_name_computer + '</b</html>' + ' has been successfully copied to ' + '<html><b>' + file_path_android + '</b</html>')
         else:
-            self.Output.append('Please wait while copying...')
+            self.Output.append('<html><b>Please wait while copying...</b</html>')
             QApplication.processEvents()
             command_copy = ['cp', '-R', file_path_computer, file_path_android[:-file_name_android_length]]
             cp = subprocess.Popen(command_copy, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             output_cp = cp.communicate()
 
-            self.Output.append(file_name_computer + ' has been successfully copied to ' + file_path_android[:-file_name_android_length])
+            self.Output.append('<html><b>' + file_name_computer + '</b</html>' + ' has been successfully copied to ' + '<html><b>' + file_path_android[:-file_name_android_length] + '</b</html>')
+
 
     def GetDeviceDirectory(self):
         path_dialog = QFileDialog()
@@ -125,6 +123,7 @@ class Go_mtpfs(QWidget, Ui_go_mptfs):
         self.AndroidPath.setText(path_dialog.getExistingDirectory(self, 'Open Folder'))
         if not len(self.AndroidPath.text()):
             self.AndroidPath.setText(os.path.expanduser('~'))
+
 
     def UnmountFileSystem(self):
         self.AndroidTree.setModel(None)
@@ -171,13 +170,14 @@ class Go_mtpfs(QWidget, Ui_go_mptfs):
         for index, line in enumerate(listDevices):
             matchedline = pattern.search(line)
             if matchedline is not None:
-                #parcing the name of the device from the line
+                #parsing the name of the device from the line
                 self.androidDeviceName = listDevices[index + 1]
                 self.androidDeviceName = self.androidDeviceName.split()
                 self.androidDeviceName = self.androidDeviceName[1].replace('Product=', '')
                 return True
 
         return False
+
 
     def MountFileSystem(self):
         # Check if a device connected via USB to the computer
@@ -231,7 +231,9 @@ class Go_mtpfs(QWidget, Ui_go_mptfs):
 
                 self.AndroidTree.setCurrentIndex(path)
 
-                self.Output.append('Your Android Device mounted at ' + self.aditionalAndroidPath)
+                self.Output.append('You\'re using the <html><b>[go-mtpfs]</b</html> library')
+
+                self.Output.append('Your Android Device mounted at ' + '<html><b>' + self.aditionalAndroidPath + '</b</html>')
         else:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Information)
@@ -239,6 +241,7 @@ class Go_mtpfs(QWidget, Ui_go_mptfs):
             msg.setText('It seems the Device hasn\'t mounted yet. Please, connect your Android Device to the computer')
             msg.setStandardButtons(QMessageBox.Ok)
             msg.exec_()
+
 
     def CopyShortcutAndroidComputer(self):
         # if system is mounted we can use shortcuts
@@ -272,6 +275,7 @@ class Go_mtpfs(QWidget, Ui_go_mptfs):
                 output_cp = cp.communicate()
 
                 self.Output.append(file_name_android + ' has been successfully copied to ' + file_path_computer[:-file_name_computer_length])
+
 
     def CopyShortcutComputerAndroid(self):
         if self.Unmount.isEnabled():
