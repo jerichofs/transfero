@@ -75,14 +75,3 @@ class Ui_jmtpfs(object):
         self.ChoosePathAndroid.setText(_translate("jmtpfs", "..."))
         self.AndroidLabel.setText(_translate("jmtpfs", "Android device"))
         self.ComputerLabel.setText(_translate("jmtpfs", "Computer"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    jmtpfs = QtWidgets.QWidget()
-    ui = Ui_jmtpfs()
-    ui.setupUi(jmtpfs)
-    jmtpfs.show()
-    sys.exit(app.exec_())
-

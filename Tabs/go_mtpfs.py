@@ -2,7 +2,6 @@ import sys
 import os
 import re
 import subprocess
-import pkg_resources
 from Resources import resources
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QMessageBox, QLineEdit, QLabel, QVBoxLayout, QHBoxLayout, QCheckBox, QFileDialog, QTreeView, QFileSystemModel, QMessageBox, QShortcut
 from PyQt5.QtGui import QIcon, QKeySequence
@@ -40,12 +39,12 @@ class Go_mtpfs(QWidget, Ui_go_mptfs):
 
         self.ComputerTree.setCurrentIndex(path)
 
+
         self.AndroidPath.setText(os.path.expanduser('~'))
 
         # setting up shortcuts for copying files
         self.copy_android_computer = QShortcut(QKeySequence('Right'), self, self.CopyShortcutAndroidComputer)
         self.copy_computer_android = QShortcut(QKeySequence('Left'), self, self.CopyShortcutComputerAndroid)
-
 
         self.ComputerTree.clicked.connect(self.GetComputerFilePath)
         self.Mount.clicked.connect(self.MountFileSystem)
@@ -57,7 +56,6 @@ class Go_mtpfs(QWidget, Ui_go_mptfs):
     def GetComputerFilePath(self):
         index = self.ComputerTree.currentIndex()
         path = self.ComputerTreeModel.rootPath()
-
 
     def CopyFileFromAndroidToComputer(self):
 
@@ -180,7 +178,6 @@ class Go_mtpfs(QWidget, Ui_go_mptfs):
                 return True
 
         return False
-
 
     def MountFileSystem(self):
         # Check if a device connected via USB to the computer
