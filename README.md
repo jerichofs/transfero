@@ -1,1 +1,44 @@
-# Transfero
+## About
+
+transfero is a program the purpose of which to unite MTP FUSE filesystems
+such as go-mtpfs, jmtpfs, mtpfs into one place and use it with friendly GUI interface.
+The program allows you to transfer files between android devices and your local linux machine
+via USB by using one or more FUSE filesystems at the same time. The GUI implementation almost
+entirely relies on the next works:
+* [go-mtpfs](https://github.com/hanwen/go-mtpfs)
+* [jmtpfs](https://github.com/kiorky/jmtpfs)
+* [mtpfs](https://github.com/cjd/mtpfs)
+
+## Requirements
+In order for the program to work properly you need to install **mtp-tools**. You can do that
+by executing the next command:
+```
+sudo apt-get install mtp-tools
+```
+
+> **Note:** For correct work, the program also requires **libmtp** to be installed but since **mtp-tools**
+> already contains this library it's not necessary to install it apart
+
+### If you want to use **go-mtpfs**
+ You need to install **the Go compiler** and **go-mtpfs** itself
+
+ To install the Go compiler
+```
+sudo apt-get install golang-go
+```
+To install go-mtpfs
+```
+sudo apt-get install go-mtpfs
+```
+### If you want to use **jmtpfs**
+ You need to install **jmtpfs**
+ To install jmtpfs
+ ```
+ sudo apt-get install jmtpfs
+ ```
+### If you want to use **mtpfs**
+You need to install **mtpfs**
+To install mtpfs
+```
+sudo apt-get install mtpfs
+```
