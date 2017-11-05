@@ -16,6 +16,7 @@ by executing the next command:
 sudo apt-get install mtp-tools
 ```
 
+
 > **Note:** For correct work, the program also requires **libmtp** to be installed but since **mtp-tools**
 > already contains this library it's not necessary to install it apart
 
@@ -26,19 +27,35 @@ sudo apt-get install mtp-tools
 ```
 sudo apt-get install golang-go
 ```
+
 To install go-mtpfs
 ```
 sudo apt-get install go-mtpfs
 ```
 ### If you want to use **jmtpfs**
  You need to install **jmtpfs**
+
  To install jmtpfs
  ```
  sudo apt-get install jmtpfs
  ```
 ### If you want to use **mtpfs**
 You need to install **mtpfs**
+
 To install mtpfs
 ```
 sudo apt-get install mtpfs
 ```
+
+> **Note:** You should install all these libraries. If one of them doesn't work you can always use another one
+
+## Guide
+* Install all requirements
+* connect your android device to the computer via USB
+* Mount one of the filesystems **go-mtpfs**, **jmtpfs**, **mtpfs**
+* in the Tree View in the Android folder you will see your mounted Android storage
+* Share files (you can use key arrows left and right on you keyboard to transfer files)
+
+> **Note:** All these libraries **does not work properly when the phone is locked by the lockscreen**
+> (especially during transfering files). Unlock the phone and it should work again as long as
+> the cord remains connected.
