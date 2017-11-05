@@ -1,11 +1,10 @@
-import sys
-import os
+import sys, os
 import re
 import subprocess
 from Resources import resources
+from GeneratedUI.ui_go_mtpfs import Ui_go_mptfs
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QMessageBox, QLineEdit, QLabel, QVBoxLayout, QHBoxLayout, QCheckBox, QFileDialog, QTreeView, QFileSystemModel, QMessageBox, QShortcut
 from PyQt5.QtGui import QIcon, QKeySequence
-from GeneratedUI.ui_go_mtpfs import Ui_go_mptfs
 
 class Go_mtpfs(QWidget, Ui_go_mptfs):
     def __init__(self):
@@ -257,24 +256,24 @@ class Go_mtpfs(QWidget, Ui_go_mptfs):
             file_name_computer_length = len(file_name_computer)
 
             if file_type_computer == 'Folder':
-                self.Output.append('Please wait while copying...')
+                self.Output.append('<html><b>Please wait while copying...</b</html>')
                 # the next command allows to show Output while a file is copying, it's useful when files are large and thus we notify a user to wait
                 QApplication.processEvents()
                 command_copy = ['cp', '-R', file_path_android, file_path_computer]
                 cp = subprocess.Popen(command_copy, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 output_cp = cp.communicate()
 
-                self.Output.append(file_name_android + ' has been successfully copied to ' + file_path_computer)
+                self.Output.append('<html><b>' + file_name_android + '</b</html>' + ' has been successfully copied to ' + '<html><b>' + file_path_computer + '</b</html>')
             else:
 
-                self.Output.append('Please wait while copying...')
+                self.Output.append('<html><b>Please wait while copying...</b</html>')
                 QApplication.processEvents()
                 # "in file_path_computer" we delete the name of the file at the end of the path
                 command_copy = ['cp', '-R', file_path_android, file_path_computer[:-file_name_computer_length]]
                 cp = subprocess.Popen(command_copy, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 output_cp = cp.communicate()
 
-                self.Output.append(file_name_android + ' has been successfully copied to ' + file_path_computer[:-file_name_computer_length])
+                self.Output.append('<html><b>' + file_name_android + '</b</html>' + ' has been successfully copied to ' + '<html><b>' + file_path_computer[:-file_name_computer_length] + '</b</html>')
 
 
     def CopyShortcutComputerAndroid(self):
@@ -291,19 +290,19 @@ class Go_mtpfs(QWidget, Ui_go_mptfs):
             file_name_android_length = len(file_name_android)
 
             if file_type_android == 'Folder':
-                self.Output.append('Please wait while copying...')
+                self.Output.append('<html><b>Please wait while copying...</b</html>')
 
                 QApplication.processEvents()
                 command_copy = ['cp', '-R', file_path_computer, file_path_android]
                 cp = subprocess.Popen(command_copy, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 output_cp = cp.communicate()
 
-                self.Output.append(file_name_computer + ' has been successfully copied to ' + file_path_android)
+                self.Output.append('<html><b>' + file_name_computer + '</b</html>' + ' has been successfully copied to ' + '<html><b>' + file_path_android  + '</b</html>')
             else:
-                self.Output.append('Please wait while copying...')
+                self.Output.append('<html><b>Please wait while copying...</b</html>')
                 QApplication.processEvents()
                 command_copy = ['cp', '-R', file_path_computer, file_path_android[:-file_name_android_length]]
                 cp = subprocess.Popen(command_copy, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 output_cp = cp.communicate()
 
-                self.Output.append(file_name_computer + ' has been successfully copied to ' + file_path_android[:-file_name_android_length])
+                self.Output.append('<html><b>' + file_name_computer + '</b</html>' + ' has been successfully copied to ' + '<html><b>' + file_path_android[:-file_name_android_length] + '</b</html>')
