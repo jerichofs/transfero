@@ -10,12 +10,16 @@ entirely relies on the next works:
 * [mtpfs](https://github.com/cjd/mtpfs)
 
 ## Requirements
-In order for the program to work properly you need to install **mtp-tools**. You can do that
+In order for the program to work properly you need to install **mtp-tools** and **PyQt5**. You can do that
 by executing the next command:
 ```
 sudo apt-get install mtp-tools
 ```
+To install **PyQt5**
 
+```
+sudo apt-get install python3-pyqt5
+```
 
 > **Note:** For correct work, the program also requires **libmtp** to be installed but since **mtp-tools**
 > already contains this library it's not necessary to install it apart
