@@ -52,7 +52,14 @@ sudo apt-get install mtpfs
 ```
 
 > **Note:** You should install all these libraries. If one of them doesn't work you can always use another one
-
+## Install
+### PPA
+In order to install the program just type in the next commands:
+```
+sudo add-apt-repository ppa:jerichofs/jaconda
+sudo apt-get update
+sudo apt-get install transfero
+```
 ## Guide
 * Install all requirements
 * connect your android device to the computer via USB
