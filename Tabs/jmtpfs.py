@@ -31,7 +31,7 @@ class Jmtpfs(QWidget, Ui_jmtpfs):
         self.ComputerTree.expand(path)
         self.ComputerTree.scrollTo(path)
 
-        self.ComputerTree.setColumnWidth(0, 200)
+        self.ComputerTree.setColumnWidth(0, 350)
         self.ComputerTree.setColumnWidth(1, 50)
         self.ComputerTree.setColumnWidth(2, 50)
         self.ComputerTree.setColumnWidth(3, 50)
@@ -168,7 +168,7 @@ class Jmtpfs(QWidget, Ui_jmtpfs):
                 self.AndroidTree.expand(path)
                 self.AndroidTree.scrollTo(path)
 
-                self.AndroidTree.setColumnWidth(0, 200)
+                self.AndroidTree.setColumnWidth(0, 350)
                 self.AndroidTree.setColumnWidth(1, 60)
                 self.AndroidTree.setColumnWidth(2, 50)
                 self.AndroidTree.setColumnWidth(3, 50)
