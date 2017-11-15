@@ -5,6 +5,7 @@ from Tabs.go_mtpfs import Go_mtpfs
 from Tabs.jmtpfs import Jmtpfs
 from Tabs.mtpfs import Mtpfs
 from PyQt5.QtGui import QIcon
+from DialogWindows.dialog_dependencies import DialogDependencies
 from transfero import Transfero
 
 if __name__ == '__main__':
@@ -20,5 +21,7 @@ if __name__ == '__main__':
     window.addTab(mtpfs_tab, 'Mtpfs')
 
     window.show()
+
+    depend = DialogDependencies()
 
     sys.exit(app.exec_())
