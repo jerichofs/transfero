@@ -22,6 +22,6 @@ if __name__ == '__main__':
 
     window.show()
 
-    depend = DialogDependencies()
+    dialog_dependencies = DialogDependencies()
 
     sys.exit(app.exec_())
