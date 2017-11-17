@@ -1,5 +1,5 @@
 import sys
-import os.path
+import os
 import subprocess
 from GeneratedUI.ui_dependencies import Ui_Depend
 from PyQt5.QtWidgets import QDialog
@@ -11,6 +11,9 @@ class DialogDependencies(QDialog, Ui_Depend):
         # set fixed size of the dialog without resizing
         self.setFixedSize(self.size())
         self.CheckLibraries()
+
+        self.transfero_logs_directory = os.path.dirname('.config/transfero/settings/')
+        self.transfero_logs_file_path = self.transfero_logs_directory + '/dialog_state.txt'
 
         self.check_window.stateChanged.connect(self.CheckBoxStateChanged)
         self.check_libraries.clicked.connect(self.UpdateStateLibraries)
@@ -83,8 +86,8 @@ class DialogDependencies(QDialog, Ui_Depend):
         self.CheckDialogOpen()
 
     def NeverOpenDialog(self):
-        if os.path.isfile('dialog_state'):
-            file = open('dialog_state', 'r')
+        if os.path.isfile(self.transfero_logs_file_path):
+            file = open(self.transfero_logs_file_path, 'r')
             string = file.read().replace('\n', '')
             file.close()
 
@@ -95,9 +98,12 @@ class DialogDependencies(QDialog, Ui_Depend):
             self.exec_()
 
     def CheckDialogOpen(self):
-        #if there's not a file
-        if not os.path.isfile('dialog_state'):
-            file = open('dialog_state', 'w+')
+        # if there's not a folder .transfero then create it
+        if not os.path.exists(self.transfero_logs_directory):
+            os.makedirs(self.transfero_logs_directory)
+            #if there's not a file
+        if not os.path.isfile(self.transfero_logs_file_path):
+            file = open(self.transfero_logs_file_path, 'w+')
             # check if the checkbox's been enabled
             if self.check_window.isChecked():
                 file.write('True')
@@ -109,7 +115,7 @@ class DialogDependencies(QDialog, Ui_Depend):
                 file.close()
         else:
             # if the file already exists
-            file = open('dialog_state', 'w+')
+            file = open(self.transfero_logs_file_path, 'w+')
             # check if the checkbox's been enabled
             if self.check_window.isChecked():
                 file.write('True')
