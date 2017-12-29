@@ -177,7 +177,7 @@ class Mtpfs(QWidget, Ui_mtpfs):
                 self.AndroidTree.setCurrentIndex(path)
 
 
-                self.Output.append('You\'re using the <html><b>[jmtpfs]</b</html> library')
+                self.Output.append('You\'re using the <html><b>[mtpfs]</b</html> library')
 
                 self.Output.append('Your Android Device mounted at ' + '<html><b>' + self.aditionalAndroidPath + '</b</html>')
         else:
