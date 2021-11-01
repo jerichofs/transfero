@@ -1,6 +1,6 @@
 ## About
 
-transfero is a program the purpose of which to unite MTP FUSE filesystems
+Transfero is a program the purpose of which to unite MTP FUSE filesystems
 such as go-mtpfs, jmtpfs, mtpfs into one place and use it with friendly GUI interface.
 The program allows you to transfer files between android devices and your local linux machine
 via USB by using one or more FUSE filesystems at the same time. The GUI implementation almost
